@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồng Thịnh - Thư ký VP Chùa Bửu Đà</title>
+    <style>
+        /* CÀI ĐẶT CHUNG */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Thay nền trắng bằng màu Gradient nhẹ nhàng (Vàng kem ấm) */
+            background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95); /* Màu nền thẻ trắng đục */
+            width: 100%;
+            max-width: 420px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        /* ẢNH BÌA & AVATAR */
+        .cover-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .avatar-container {
+            width: 140px;
+            height: 140px;
+            margin: -70px auto 10px;
+            border-radius: 50%;
+            border: 5px solid white;
+            overflow: hidden;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* THÔNG TIN CÁ NHÂN */
+        .info {
+            padding: 0 25px 40px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            /* Tô màu chữ lớn: Màu nâu đỏ/cam đất đậm đà hơn */
+            color: #a04000; 
+            margin: 10px 0 5px;
+            font-weight: 800; /* Chữ đậm hơn */
+        }
+        .title {
+            color: #555; /* Màu chữ tiêu đề đậm hơn xíu */
+            font-weight: 600; /* Chữ đậm hơn */
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        /* CÁC NÚT LIÊN KẾT (BUTTON) */
+        .link-btn {
+            display: flex;
+            flex-direction: column; /* Để hỗ trợ xuống dòng */
+            align-items: center;
+            justify-content: center;
+            color: #fff; /* Chữ màu trắng cho nổi bật */
+            padding: 18px;
+            margin: 15px 0;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 700; /* Chữ đậm */
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            opacity: 0.95;
+        }
+
+        /* MÀU SẮC TỪNG NÚT (Phân loại cho đẹp) */
+        
+        /* 1. Tra Cứu Linh Cốt - Màu Xanh Ngọc */
+        .btn-linh-cot {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+        }
+
+        /* 2. Sao Hạn - Màu Cam Đất (Chùa) */
+        .btn-sao-han {
+            background: linear-gradient(to right, #d38312, #a83279);
+        }
+
+        /* 3. Hằng Thuận - Màu Hồng Đỏ (Hạnh phúc) */
+        .btn-hang-thuan {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+        }
+        
+        /* 4. Cúng Cơm - Màu Nâu (Trang nghiêm) */
+        .btn-cung-com {
+            background: linear-gradient(to right, #8E2DE2, #4A00E0);
+        }
+
+        /* 5. Facebook - Màu Xanh FB */
+        .btn-facebook {
+            background-color: #1877F2;
+            color: white;
+        }
+        
+        /* 6. Zalo - Màu Xanh Zalo */
+        .btn-zalo {
+            background-color: #0068ff;
+            color: white;
+        }
+
+        .footer {
+            font-size: 13px;
+            color: #777;
+            margin-top: 35px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="bia.jpg" alt="Cover Chùa Bửu Đà" class="cover-image">
+        
+        <div class="avatar-container">
+            <img src="avatar.jpg" alt="Đồng Thịnh">
+        </div>
+
+        <div class="info">
+            <h1>Đồng Thịnh</h1>
+            <div class="title">Thư ký Văn Phòng Chùa Bửu Đà</div>
+
+            <a href="https://chuabuudaqlc.onrender.com/" class="link-btn btn-linh-cot" target="_blank">
+                Tra Cứu Linh - Cốt
+            </a>
+
+            <a href="https://quanlycot.github.io/TraCuuSaoHan/" class="link-btn btn-sao-han" target="_blank">
+                <span>Tra Cứu Sao Hạn</span>
+                <span style="font-size: 0.9em; font-weight: normal;">& Ghi Danh Cầu An - Cầu Siêu</span>
+            </a>
+
+            <a href="https://chuabuuda.org/vn/dat-mam-cung.html" class="link-btn btn-cung-com" target="_blank">
+                Đăng Ký Cúng Cơm - Cúng Giỗ
+            </a>
+
+            <a href="https://quanlycot.github.io/dang-ky-le-hang-thuan/" class="link-btn btn-hang-thuan" target="_blank">
+                Đăng Ký Lễ Hằng Thuận
+            </a>
+            
+            <a href="https://www.facebook.com/share/183fQ9Rpp2/?mibextid=wwXIfr" class="link-btn btn-facebook" target="_blank">
+                Kết nối Facebook
+            </a>
+
+            <a href="https://zalo.me/0703676073" class="link-btn btn-zalo" target="_blank">
+                Liên hệ Zalo: 0703.676.073
+            </a>
+
+            <div class="footer">
+                © Văn phòng Chùa Bửu Đà 419/11 CMT8,P.Hoà Hưng
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
