@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đồng Thịnh - Thư ký VP Chùa Bửu Đà</title>
     <style>
+        /* --- KHẮC PHỤC LỖI TRÀN VIỀN --- */
+        * {
+            box-sizing: border-box; /* Code giúp mọi thứ nằm gọn trong khung */
+        }
+
         /* CÀI ĐẶT CHUNG */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Thay nền trắng bằng màu Gradient nhẹ nhàng (Vàng kem ấm) */
             background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
             display: flex;
             justify-content: center;
@@ -19,7 +23,7 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.95); /* Màu nền thẻ trắng đục */
+            background: rgba(255, 255, 255, 0.95);
             width: 100%;
             max-width: 420px;
             border-radius: 25px;
@@ -27,163 +31,158 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             text-align: center;
             position: relative;
+            z-index: 1;
         }
 
         /* ẢNH BÌA & AVATAR */
-        .cover-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
+        .cover-image { width: 100%; height: 200px; object-fit: cover; display: block; }
         
         .avatar-container {
-            width: 140px;
-            height: 140px;
-            margin: -70px auto 10px;
-            border-radius: 50%;
-            border: 5px solid white;
-            overflow: hidden;
-            position: relative;
-            background-color: #fff;
+            width: 140px; height: 140px; margin: -70px auto 10px;
+            border-radius: 50%; border: 5px solid white;
+            overflow: hidden; position: relative; background-color: #fff;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* THÔNG TIN CÁ NHÂN */
-        .info {
-            padding: 0 25px 40px;
+        /* THÔNG TIN - Đã chỉnh lại khoảng cách lề (padding) rộng hơn */
+        .info { 
+            padding: 0 30px 40px; /* Tăng khoảng cách 2 bên lên 30px */
         }
         
-        h1 {
-            font-size: 28px;
-            /* Tô màu chữ lớn: Màu nâu đỏ/cam đất đậm đà hơn */
-            color: #a04000; 
-            margin: 10px 0 5px;
-            font-weight: 800; /* Chữ đậm hơn */
-        }
-        .title {
-            color: #555; /* Màu chữ tiêu đề đậm hơn xíu */
-            font-weight: 600; /* Chữ đậm hơn */
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
+        h1 { font-size: 28px; color: #a04000; margin: 10px 0 5px; font-weight: 800; }
+        .title { color: #555; font-weight: 600; margin-bottom: 25px; font-size: 16px; }
 
-        /* CÁC NÚT LIÊN KẾT (BUTTON) */
+        /* NÚT LIÊN KẾT */
         .link-btn {
-            display: flex;
-            flex-direction: column; /* Để hỗ trợ xuống dòng */
-            align-items: center;
-            justify-content: center;
-            color: #fff; /* Chữ màu trắng cho nổi bật */
-            padding: 18px;
-            margin: 15px 0;
-            text-decoration: none;
-            border-radius: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: 700; /* Chữ đậm */
-            font-size: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            line-height: 1.4;
-            text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #fff; padding: 18px; margin: 15px 0; text-decoration: none;
+            border-radius: 15px; transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 700; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            line-height: 1.4; text-align: center; cursor: pointer; border: none; 
+            width: 100%; /* Giờ đã an toàn nhờ box-sizing */
+            font-family: inherit;
         }
+        .link-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); opacity: 0.95; }
 
-        .link-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            opacity: 0.95;
-        }
-
-        /* MÀU SẮC TỪNG NÚT (Phân loại cho đẹp) */
+        /* MÀU SẮC */
+        .btn-linh-cot { background: linear-gradient(to right, #11998e, #38ef7d); }
+        .btn-sao-han { background: linear-gradient(to right, #d38312, #a83279); }
+        .btn-cung-com { background: linear-gradient(to right, #8E2DE2, #4A00E0); }
+        .btn-hang-thuan { background: linear-gradient(to right, #ff512f, #dd2476); }
+        .btn-facebook { background-color: #1877F2; color: white; }
+        .btn-zalo { background-color: #0068ff; color: white; }
         
-        /* 1. Tra Cứu Linh Cốt - Màu Xanh Ngọc */
-        .btn-linh-cot {
-            background: linear-gradient(to right, #11998e, #38ef7d);
+        /* Nút Cúng Dường Nổi Bật */
+        .btn-cung-duong {
+            background: linear-gradient(to right, #FDC830, #F37335);
+            border: 1px solid #fff;
+            box-shadow: 0 0 15px rgba(243, 115, 53, 0.4);
         }
 
-        /* 2. Sao Hạn - Màu Cam Đất (Chùa) */
-        .btn-sao-han {
-            background: linear-gradient(to right, #d38312, #a83279);
+        /* POPUP (MODAL) */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); z-index: 999;
+            justify-content: center; align-items: center; padding: 20px;
         }
-
-        /* 3. Hằng Thuận - Màu Hồng Đỏ (Hạnh phúc) */
-        .btn-hang-thuan {
-            background: linear-gradient(to right, #ff512f, #dd2476);
+        .modal-content {
+            background: white; width: 100%; max-width: 380px;
+            border-radius: 20px; padding: 25px; text-align: center;
+            position: relative; animation: popIn 0.3s ease;
         }
+        @keyframes popIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
         
-        /* 4. Cúng Cơm - Màu Nâu (Trang nghiêm) */
-        .btn-cung-com {
-            background: linear-gradient(to right, #8E2DE2, #4A00E0);
-        }
-
-        /* 5. Facebook - Màu Xanh FB */
-        .btn-facebook {
-            background-color: #1877F2;
-            color: white;
-        }
+        .bank-title { color: #a04000; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
+        .qr-img { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ddd; }
         
-        /* 6. Zalo - Màu Xanh Zalo */
-        .btn-zalo {
-            background-color: #0068ff;
-            color: white;
+        .bank-info-box {
+            background: #f8f9fa; padding: 15px; border-radius: 12px;
+            text-align: left; margin-bottom: 15px; border: 1px solid #eee;
         }
-
-        .footer {
-            font-size: 13px;
-            color: #777;
-            margin-top: 35px;
-            font-weight: 500;
+        .bank-label { font-size: 12px; color: #777; margin-bottom: 2px; }
+        .bank-value { font-size: 16px; color: #333; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .copy-btn {
+            background: #e9ecef; color: #333; border: none; padding: 5px 10px;
+            border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 600;
         }
+        .copy-btn:active { background: #ced4da; }
+        .close-btn {
+            background: #555; color: white; border: none; padding: 12px 30px;
+            border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 10px; width: 100%;
+        }
+        .footer { font-size: 13px; color: #777; margin-top: 35px; font-weight: 500; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <img src="bia.jpg" alt="Cover Chùa Bửu Đà" class="cover-image">
-        
-        <div class="avatar-container">
-            <img src="avatar.jpg" alt="Đồng Thịnh">
-        </div>
+        <img src="bia.jpg" alt="Cover" class="cover-image">
+        <div class="avatar-container"><img src="avatar.jpg" alt="Avatar"></div>
 
         <div class="info">
             <h1>Đồng Thịnh</h1>
             <div class="title">Thư ký Văn Phòng Chùa Bửu Đà</div>
 
-            <a href="https://chuabuudaqlc.onrender.com/" class="link-btn btn-linh-cot" target="_blank">
-                Tra Cứu Linh - Cốt
-            </a>
+            <button onclick="openModal()" class="link-btn btn-cung-duong">
+                <span>Cúng Dường Tam Bảo</span>
+                <span style="font-size: 0.9em; font-weight: normal; margin-top: 3px;">(Xem QR & Số tài khoản)</span>
+            </button>
 
+            <a href="https://chuabuudaqlc.onrender.com/" class="link-btn btn-linh-cot" target="_blank">Tra Cứu Linh - Cốt</a>
+            
             <a href="https://quanlycot.github.io/TraCuuSaoHan/" class="link-btn btn-sao-han" target="_blank">
                 <span>Tra Cứu Sao Hạn</span>
                 <span style="font-size: 0.9em; font-weight: normal;">& Ghi Danh Cầu An - Cầu Siêu</span>
             </a>
 
-            <a href="https://chuabuuda.org/vn/dat-mam-cung.html" class="link-btn btn-cung-com" target="_blank">
-                Đăng Ký Cúng Cơm - Cúng Giỗ
-            </a>
+            <a href="https://chuabuuda.org/vn/dat-mam-cung.html" class="link-btn btn-cung-com" target="_blank">Đăng Ký Cúng Cơm - Cúng Giỗ</a>
 
-            <a href="https://quanlycot.github.io/dang-ky-le-hang-thuan/" class="link-btn btn-hang-thuan" target="_blank">
-                Đăng Ký Lễ Hằng Thuận
-            </a>
+            <a href="https://quanlycot.github.io/dang-ky-le-hang-thuan/" class="link-btn btn-hang-thuan" target="_blank">Đăng Ký Lễ Hằng Thuận</a>
             
-            <a href="https://www.facebook.com/share/183fQ9Rpp2/?mibextid=wwXIfr" class="link-btn btn-facebook" target="_blank">
-                Kết nối Facebook
-            </a>
+            <a href="https://www.facebook.com/share/183fQ9Rpp2/?mibextid=wwXIfr" class="link-btn btn-facebook" target="_blank">Kết nối Facebook</a>
 
-            <a href="https://zalo.me/0703676073" class="link-btn btn-zalo" target="_blank">
-                Liên hệ Zalo: 0703.676.073
-            </a>
+            <a href="https://zalo.me/0703676073" class="link-btn btn-zalo" target="_blank">Liên hệ Zalo: 0703.676.073</a>
 
-            <div class="footer">
-                © Văn phòng Chùa Bửu Đà 419/11 CMT8,P.Hoà Hưng
-            </div>
+            <div class="footer">© Văn phòng Chùa Bửu Đà 419/11 CMT8, P.Hoà Hưng</div>
         </div>
     </div>
+
+    <div id="bankModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <div class="bank-title">Thông Tin Cúng Dường</div>
+            
+            <img src="qr-bank.jpg" alt="QR Ngan Hang" class="qr-img">
+
+            <div class="bank-info-box">
+                <div class="bank-label">Ngân hàng (Cúng dường Tam Bảo):</div>
+                <div class="bank-value">TPBank (Tiên Phong)</div>
+
+                <div class="bank-label">Số tài khoản:</div>
+                <div class="bank-value">
+                    <span id="stk-tp">38652369419</span>
+                    <button class="copy-btn" onclick="copyToClipboard('38652369419')">Sao chép</button>
+                </div>
+
+                <div class="bank-label">Chủ tài khoản:</div>
+                <div class="bank-value">NGUYEN HONG QUANG</div>
+            </div>
+
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                Quý Phật tử có thể quét mã QR hoặc bấm nút "Sao chép" để chuyển khoản.
+            </p>
+
+            <button class="close-btn" onclick="document.getElementById('bankModal').style.display='none'">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal() { document.getElementById('bankModal').style.display = 'flex'; }
+        function closeModal(event) { if (event.target.className === 'modal-overlay') { document.getElementById('bankModal').style.display = 'none'; } }
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() { alert('Đã sao chép số tài khoản: ' + text); }, function(err) { console.error('Lỗi sao chép: ', err); });
+        }
+    </script>
 
 </body>
 </html>
