@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đồng Thịnh - Thư ký VP Chùa Bửu Đà</title>
     <style>
-        /* --- KHẮC PHỤC LỖI TRÀN VIỀN --- */
-        * {
-            box-sizing: border-box; /* Code giúp mọi thứ nằm gọn trong khung */
-        }
+        /* --- KHẮC PHỤC LỖI TRÀN VIỀN & RESET --- */
+        * { box-sizing: border-box; outline: none; }
 
         /* CÀI ĐẶT CHUNG */
         body {
@@ -45,27 +43,24 @@
         }
         .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* THÔNG TIN - Đã chỉnh lại khoảng cách lề (padding) rộng hơn */
-        .info { 
-            padding: 0 30px 40px; /* Tăng khoảng cách 2 bên lên 30px */
-        }
+        /* THÔNG TIN */
+        .info { padding: 0 30px 40px; }
         
         h1 { font-size: 28px; color: #a04000; margin: 10px 0 5px; font-weight: 800; }
         .title { color: #555; font-weight: 600; margin-bottom: 25px; font-size: 16px; }
 
-        /* NÚT LIÊN KẾT */
+        /* NÚT LIÊN KẾT (STYLE CHUNG) */
         .link-btn {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: #fff; padding: 18px; margin: 15px 0; text-decoration: none;
             border-radius: 15px; transition: transform 0.2s, box-shadow 0.2s;
             font-weight: 700; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             line-height: 1.4; text-align: center; cursor: pointer; border: none; 
-            width: 100%; /* Giờ đã an toàn nhờ box-sizing */
-            font-family: inherit;
+            width: 100%; font-family: inherit;
         }
         .link-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); opacity: 0.95; }
 
-        /* MÀU SẮC */
+        /* MÀU SẮC CÁC NÚT */
         .btn-linh-cot { background: linear-gradient(to right, #11998e, #38ef7d); }
         .btn-sao-han { background: linear-gradient(to right, #d38312, #a83279); }
         .btn-cung-com { background: linear-gradient(to right, #8E2DE2, #4A00E0); }
@@ -80,37 +75,63 @@
             box-shadow: 0 0 15px rgba(243, 115, 53, 0.4);
         }
 
-        /* POPUP (MODAL) */
+        /* Nút Phật Sự (Mới) - Màu trầm để phân biệt nội bộ */
+        .btn-phat-su {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            border: 1px dashed rgba(255,255,255,0.3);
+        }
+
+        /* POPUP (MODAL) HỆ THỐNG */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); z-index: 999;
+            background: rgba(0, 0, 0, 0.85); z-index: 999;
             justify-content: center; align-items: center; padding: 20px;
+            backdrop-filter: blur(5px); /* Hiệu ứng mờ nền */
         }
         .modal-content {
             background: white; width: 100%; max-width: 380px;
             border-radius: 20px; padding: 25px; text-align: center;
             position: relative; animation: popIn 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
         @keyframes popIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
         
-        .bank-title { color: #a04000; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
-        .qr-img { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ddd; }
+        .modal-title { color: #a04000; font-weight: bold; font-size: 20px; margin-bottom: 15px; }
         
+        /* Style riêng cho Bank Modal */
+        .qr-img { width: 100%; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ddd; }
         .bank-info-box {
             background: #f8f9fa; padding: 15px; border-radius: 12px;
             text-align: left; margin-bottom: 15px; border: 1px solid #eee;
         }
         .bank-label { font-size: 12px; color: #777; margin-bottom: 2px; }
         .bank-value { font-size: 16px; color: #333; font-weight: bold; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        
         .copy-btn {
             background: #e9ecef; color: #333; border: none; padding: 5px 10px;
             border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 600;
         }
         .copy-btn:active { background: #ced4da; }
+
+        /* Style riêng cho Password Modal */
+        .password-input {
+            width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 12px;
+            font-size: 18px; text-align: center; margin-bottom: 15px; transition: border 0.3s;
+        }
+        .password-input:focus { border-color: #4ca1af; }
+        .btn-access {
+            background: #2c3e50; color: white; width: 100%; padding: 15px;
+            border: none; border-radius: 12px; font-size: 16px; font-weight: bold;
+            cursor: pointer; transition: background 0.3s;
+        }
+        .btn-access:hover { background: #34495e; }
+        .error-msg { color: #e74c3c; font-size: 14px; margin-top: 10px; display: none; }
+
         .close-btn {
             background: #555; color: white; border: none; padding: 12px 30px;
             border-radius: 30px; font-weight: bold; cursor: pointer; margin-top: 10px; width: 100%;
         }
+
         .footer { font-size: 13px; color: #777; margin-top: 35px; font-weight: 500; }
     </style>
 </head>
@@ -124,7 +145,7 @@
             <h1>Đồng Thịnh</h1>
             <div class="title">Thư ký Văn Phòng Chùa Bửu Đà</div>
 
-            <button onclick="openModal()" class="link-btn btn-cung-duong">
+            <button onclick="openBankModal()" class="link-btn btn-cung-duong">
                 <span>Cúng Dường Tam Bảo</span>
                 <span style="font-size: 0.9em; font-weight: normal; margin-top: 3px;">(Xem QR & Số tài khoản)</span>
             </button>
@@ -144,13 +165,18 @@
 
             <a href="https://zalo.me/0703676073" class="link-btn btn-zalo" target="_blank">Liên hệ Zalo: 0703.676.073</a>
 
+            <button onclick="openPassModal()" class="link-btn btn-phat-su">
+                <span>Phật Sự (Nội Bộ)</span>
+                <span style="font-size: 0.85em; font-weight: normal; margin-top: 3px; opacity: 0.9;">Dành cho Chư Tăng & Ban Thư Ký</span>
+            </button>
+
             <div class="footer">© Văn phòng Chùa Bửu Đà 419/11 CMT8, P.Hoà Hưng</div>
         </div>
     </div>
 
-    <div id="bankModal" class="modal-overlay" onclick="closeModal(event)">
+    <div id="bankModal" class="modal-overlay" onclick="closeModal(event, 'bankModal')">
         <div class="modal-content">
-            <div class="bank-title">Thông Tin Cúng Dường</div>
+            <div class="modal-title">Thông Tin Cúng Dường</div>
             
             <img src="qr-bank.jpg" alt="QR Ngan Hang" class="qr-img">
 
@@ -176,11 +202,74 @@
         </div>
     </div>
 
+    <div id="passModal" class="modal-overlay" onclick="closeModal(event, 'passModal')">
+        <div class="modal-content">
+            <div class="modal-title">Khu Vực Nội Bộ</div>
+            <p style="color: #666; margin-bottom: 20px;">Vui lòng nhập mật khẩu xác thực để truy cập Thỉnh Quý Thầy.</p>
+            
+            <input type="password" id="passInput" class="password-input" placeholder="Nhập mật khẩu..." onkeypress="handleEnter(event)">
+            
+            <div id="errorMsg" class="error-msg">Mật khẩu không đúng!</div>
+
+            <button class="btn-access" onclick="checkPassword()">TRUY CẬP</button>
+            
+            <button class="close-btn" style="background: transparent; color: #777; border: 1px solid #ddd; margin-top: 15px;" onclick="document.getElementById('passModal').style.display='none'">Hủy bỏ</button>
+        </div>
+    </div>
+
     <script>
-        function openModal() { document.getElementById('bankModal').style.display = 'flex'; }
-        function closeModal(event) { if (event.target.className === 'modal-overlay') { document.getElementById('bankModal').style.display = 'none'; } }
+        // Mở Modal Ngân Hàng
+        function openBankModal() { 
+            document.getElementById('bankModal').style.display = 'flex'; 
+        }
+
+        // Mở Modal Mật Khẩu
+        function openPassModal() {
+            document.getElementById('passModal').style.display = 'flex';
+            document.getElementById('passInput').value = ''; // Xóa pass cũ
+            document.getElementById('errorMsg').style.display = 'none'; // Ẩn lỗi cũ
+            setTimeout(() => document.getElementById('passInput').focus(), 100); // Tự động focus vào ô nhập
+        }
+
+        // Đóng Modal khi bấm ra ngoài
+        function closeModal(event, modalId) { 
+            if (event.target.className === 'modal-overlay') { 
+                document.getElementById(modalId).style.display = 'none'; 
+            } 
+        }
+
+        // Copy số tài khoản
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() { alert('Đã sao chép số tài khoản: ' + text); }, function(err) { console.error('Lỗi sao chép: ', err); });
+            navigator.clipboard.writeText(text).then(function() { 
+                alert('Đã sao chép số tài khoản: ' + text); 
+            }, function(err) { 
+                console.error('Lỗi sao chép: ', err); 
+            });
+        }
+
+        // Xử lý Mật Khẩu
+        function checkPassword() {
+            const input = document.getElementById('passInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const targetLink = "https://buudapagoda.github.io/Thinh_Quy_Thay/";
+
+            // Mật khẩu quy định là "Q" (phân biệt hoa thường theo yêu cầu)
+            if (input === 'Q') {
+                window.open(targetLink, '_blank'); // Mở tab mới
+                document.getElementById('passModal').style.display = 'none'; // Đóng modal
+            } else {
+                errorMsg.style.display = 'block'; // Hiện thông báo lỗi
+                // Hiệu ứng rung nhẹ báo lỗi (Optional UX)
+                const inputField = document.getElementById('passInput');
+                inputField.style.borderColor = '#e74c3c';
+            }
+        }
+
+        // Cho phép ấn Enter để submit mật khẩu
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
         }
     </script>
 
